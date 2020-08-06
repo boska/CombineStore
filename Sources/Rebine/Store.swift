@@ -10,59 +10,41 @@
 import Combine
 import SwiftUI
 
-public final class Store<State, Action> {
-    private let _states: CurrentValueSubject<State, Never>
-    private let _actions: PassthroughSubject<Action, Never> = .init()
-    private let _feedbacks: PassthroughSubject<Feedback<State, Action>, Never> = .init()
+public final class Store<State: StateManageable>: ObservableObject {
+    @Published public private(set) var state: State
+    private let _actions: PassthroughSubject<State.Action, Never> = .init()
+    private let _feedbacks: PassthroughSubject<Feedback<State, State.Action>, Never> = .init()
     private var _cancellables: Set<AnyCancellable> = []
-    public convenience init<RC: RebineCompatible>(_ rcType: RC.Type) where RC.State == State, RC.Action == Action {
-        self.init(initialState: rcType.initialValue,
-                  reducer: rcType.reducer,
-                  feedback: rcType.feedback)
-    }
-    public init(
-        initialState: State,
-        reducer: Reducer<State, Action>,
-        feedback: Feedback<State, Action>
-    ) {
-        _states = CurrentValueSubject(initialState)
+
+    public init(initialState: State = .initialState) {
+        state = initialState
 
         _actions
             .handleEvents(receiveOutput: { action in
                 print("🚀 \(action)")
             })
             .compactMap { [weak self] action -> State? in
-                guard var newState = self?._states.value else { return nil }
-                reducer(&newState, action)
+                guard var newState = self?.state else { return nil }
+                State.reducer(&newState, action)
                 return newState
             }
-            .subscribe(_states)
+            .assign(to: \.state, on: self)
             .store(in: &_cancellables)
 
         _feedbacks
-            .map { [weak self] feedback -> AnyPublisher<Action, Never> in
+            .map { [weak self] feedback -> AnyPublisher<State.Action, Never> in
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
-                return feedback(self._states.eraseToAnyPublisher())
+                return State.feedback(self.$state.eraseToAnyPublisher())
             }
             .switchToLatest()
             .subscribe(_actions)
             .store(in: &_cancellables)
 
-        _feedbacks.send(feedback)
+        _feedbacks.send(State.feedback)
 
     }
-}
 
-extension Store {
-    public var statePublisher: AnyPublisher<State, Never> {
-        _states.eraseToAnyPublisher()
-    }
-
-    public func dispatch(_ action: Action) {
+    public func dispatch(_ action: State.Action) {
         _actions.send(action)
     }
 }
-
-extension Store: ObservableObject {}
-
-

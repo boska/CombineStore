@@ -22,7 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9924DC143800A062E6 /* Reducer.swift */; };
-		8DE5DF9E24DC143800A062E6 /* Rebine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* Rebine.swift */; };
+		8DE5DF9E24DC143800A062E6 /* StateManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* StateManageable.swift */; };
 		8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9B24DC143800A062E6 /* Feedback.swift */; };
 		8DE5DFA024DC143800A062E6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9C24DC143800A062E6 /* Store.swift */; };
 		8DE5DFAB24DC16E700A062E6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DFAA24DC16E700A062E6 /* ExampleApp.swift */; };
@@ -33,6 +33,7 @@
 		8DE5DFC824DC16E900A062E6 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DFC724DC16E900A062E6 /* ExampleUITests.swift */; };
 		8DE5DFD824DC180400A062E6 /* Rebine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Rebine::Rebine::Product" /* Rebine.framework */; };
 		8DE5DFD924DC180500A062E6 /* Rebine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "Rebine::Rebine::Product" /* Rebine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8DE5DFDF24DC263300A062E6 /* CounterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DFDE24DC263300A062E6 /* CounterState.swift */; };
 		OBJ_29 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_40 /* RebineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* RebineTests.swift */; };
 		OBJ_41 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* XCTestManifests.swift */; };
@@ -93,7 +94,7 @@
 
 /* Begin PBXFileReference section */
 		8DE5DF9924DC143800A062E6 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
-		8DE5DF9A24DC143800A062E6 /* Rebine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rebine.swift; sourceTree = "<group>"; };
+		8DE5DF9A24DC143800A062E6 /* StateManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManageable.swift; sourceTree = "<group>"; };
 		8DE5DF9B24DC143800A062E6 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8DE5DF9C24DC143800A062E6 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		8DE5DFA824DC16E700A062E6 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +110,7 @@
 		8DE5DFC724DC16E900A062E6 /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		8DE5DFC924DC16E900A062E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DE5DFD324DC172F00A062E6 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
+		8DE5DFDE24DC263300A062E6 /* CounterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterState.swift; sourceTree = "<group>"; };
 		OBJ_12 /* RebineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebineTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -160,9 +162,9 @@
 		8DE5DFA924DC16E700A062E6 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				8DE5DFDD24DC261900A062E6 /* Counter */,
 				8DE5DFD324DC172F00A062E6 /* Example.entitlements */,
 				8DE5DFAA24DC16E700A062E6 /* ExampleApp.swift */,
-				8DE5DFAC24DC16E700A062E6 /* CounterView.swift */,
 				8DE5DFAE24DC16E800A062E6 /* Assets.xcassets */,
 				8DE5DFB324DC16E800A062E6 /* Info.plist */,
 				8DE5DFB024DC16E800A062E6 /* Preview Content */,
@@ -201,6 +203,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DE5DFDD24DC261900A062E6 /* Counter */ = {
+			isa = PBXGroup;
+			children = (
+				8DE5DFAC24DC16E700A062E6 /* CounterView.swift */,
+				8DE5DFDE24DC263300A062E6 /* CounterState.swift */,
+			);
+			path = Counter;
 			sourceTree = "<group>";
 		};
 		OBJ_10 /* Tests */ = {
@@ -260,9 +271,9 @@
 			isa = PBXGroup;
 			children = (
 				8DE5DF9B24DC143800A062E6 /* Feedback.swift */,
-				8DE5DF9A24DC143800A062E6 /* Rebine.swift */,
 				8DE5DF9924DC143800A062E6 /* Reducer.swift */,
 				8DE5DF9C24DC143800A062E6 /* Store.swift */,
+				8DE5DF9A24DC143800A062E6 /* StateManageable.swift */,
 			);
 			name = Rebine;
 			path = Sources/Rebine;
@@ -459,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE5DFDF24DC263300A062E6 /* CounterState.swift in Sources */,
 				8DE5DFAD24DC16E700A062E6 /* CounterView.swift in Sources */,
 				8DE5DFAB24DC16E700A062E6 /* ExampleApp.swift in Sources */,
 			);
@@ -484,7 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				8DE5DF9E24DC143800A062E6 /* Rebine.swift in Sources */,
+				8DE5DF9E24DC143800A062E6 /* StateManageable.swift in Sources */,
 				8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */,
 				8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */,
 				8DE5DFA024DC143800A062E6 /* Store.swift in Sources */,

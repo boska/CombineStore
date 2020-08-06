@@ -6,7 +6,7 @@ final class RebineTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Rebine().text, "Hello, World!")
+        // XCTAssertEqual(Rebine().text, "Hello, World!")
     }
 
     static var allTests = [
