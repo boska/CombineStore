@@ -1,13 +1,13 @@
 //
 //  CounterView.swift
-//  RebineExample
+//  CombineStoreExample
 //
 //  Created by Yang on 2020/8/2.
 //
 
 import SwiftUI
-import Rebine
 import Combine
+import CombineStore
 
 struct CounterView: View {
     @StateObject var store = Store<CounterState>()

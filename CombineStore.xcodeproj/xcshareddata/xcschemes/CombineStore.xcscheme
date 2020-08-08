@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "1200"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "Rebine::Rebine"
                BuildableName = "Rebine.framework"
-               BlueprintName = "Rebine"
-               ReferencedContainer = "container:Rebine.xcodeproj">
+               BlueprintName = "CombineStore"
+               ReferencedContainer = "container:CombineStore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "Rebine::RebineTests"
-               BuildableName = "RebineTests.xctest"
-               BlueprintName = "RebineTests"
-               ReferencedContainer = "container:Rebine.xcodeproj">
+               BuildableName = "CombineStoreTests.xctest"
+               BlueprintName = "CombineStoreTests"
+               ReferencedContainer = "container:CombineStore.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,6 +57,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "Rebine::Rebine"
+            BuildableName = "Rebine.framework"
+            BlueprintName = "CombineStore"
+            ReferencedContainer = "container:CombineStore.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

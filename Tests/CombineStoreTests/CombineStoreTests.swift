@@ -1,12 +1,11 @@
 import XCTest
-@testable import Rebine
+@testable import CombineStore
 
-final class RebineTests: XCTestCase {
+final class CombineStore: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        // XCTAssertEqual(Rebine().text, "Hello, World!")
     }
 
     static var allTests = [

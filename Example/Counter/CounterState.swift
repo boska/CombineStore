@@ -5,8 +5,9 @@
 //  Created by Boska on 2020/8/6.
 //
 
-import Rebine
+
 import Combine
+import CombineStore
 import SwiftUI
 
 struct CounterState: StateManageable {
