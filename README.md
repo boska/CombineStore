@@ -1,3 +1,3 @@
-# Rebine
+# CombineStore
 
-A description of this package.
+A state management library based on Combine framework
