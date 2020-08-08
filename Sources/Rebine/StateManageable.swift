@@ -10,8 +10,8 @@ public protocol StateManageable {
     associatedtype Action
 
     static var initialState: Self { get }
-    static var reducer: Reducer<Self, Self.Action> { get }
-    static var feedback: Feedback<Self, Self.Action> { get }
+    static var reducer: Reducer<Self, Self.Action> { get } // (inout State, Action) -> Void
+    static var feedback: Feedback<Self, Self.Action> { get } // (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
 }
 
 extension StateManageable {

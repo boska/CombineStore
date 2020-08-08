@@ -10,13 +10,13 @@ import Foundation
 
 public struct Reducer<State, Action> {
     public typealias Closure = (inout State, Action) -> Void
-    private let reducerClosure: Closure
+    private let _closure: Closure
 
-    public init(_ reducerClosure: @escaping Closure) {
-        self.reducerClosure = reducerClosure
+    public init(_ closure: @escaping Closure) {
+        self._closure = closure
     }
 
     func callAsFunction(_ state: inout State, _ action: Action) {
-        reducerClosure(&state, action)
+        _closure(&state, action)
     }
 }

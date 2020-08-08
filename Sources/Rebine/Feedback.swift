@@ -10,14 +10,35 @@ import Combine
 
 public struct Feedback<State, Action> {
     public typealias Closure = (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
-    private let feedbackClosure: Closure
+    private let _closure: Closure
 
-    public init(_ feedbackClosure: @escaping Closure) {
-        self.feedbackClosure = feedbackClosure
+    public init(_ _closure: @escaping Closure) {
+        self._closure = _closure
+    }
+
+    public static func merge(_ feedbacks: [Self]) -> Self {
+        Feedback() { states in
+            Publishers.MergeMany(
+                feedbacks.map { $0(states) }
+            )
+            .eraseToAnyPublisher()
+        }
+    }
+
+    public static func scope<ScopedState: Equatable>(on stateKeyPath: WritableKeyPath<State, ScopedState>,
+                                                     _ scopedfeedback: @escaping (AnyPublisher<ScopedState, Never>) -> AnyPublisher<Action, Never>) -> Self {
+        Feedback() { states in
+            scopedfeedback(
+                states.map(stateKeyPath)
+                    .removeDuplicates()
+                    .eraseToAnyPublisher()
+            )
+            .eraseToAnyPublisher()
+        }
     }
 
     func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
-        feedbackClosure(state)
+        _closure(state)
     }
 
     static var empty: Self {

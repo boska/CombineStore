@@ -50,10 +50,15 @@ struct CounterState: StateManageable {
     }
 
     static var feedback: Feedback<CounterState, Action> {
-        .init { states in
-            let loadNumber = states
-                .map(\.isLoadingNumber)
-                .removeDuplicates()
+        .merge([
+            loadNumber,
+            timer,
+        ])
+    }
+
+    private static var loadNumber: Feedback<CounterState, Action> {
+        .scope(on: \.isLoadingNumber) { states in
+            states
                 .filter { $0 }
                 .map { _ -> AnyPublisher<Action, Never> in
                     Just(.numberDidLoad(Int.random(in: 1...100)))
@@ -64,30 +69,25 @@ struct CounterState: StateManageable {
                 .switchToLatest()
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
-
-
-
-            let timerPublisher: () -> AnyPublisher<Action, Never> = {
-                Timer.publish(every: 1.0, on: RunLoop.main, in: .default)
-                    .autoconnect()
-                    .map { _ in .increment }
-                    .print("⏱")
-                    .eraseToAnyPublisher()
-            }
-
-            let timer = states
-                .map(\.isConnectedToTimer)
-                .removeDuplicates()
-                .map { $0 ? timerPublisher() : Empty().eraseToAnyPublisher() }
-                .switchToLatest()
-                .eraseToAnyPublisher()
-
-            return Publishers.MergeMany([
-                loadNumber,
-                timer
-            ])
-            .eraseToAnyPublisher()
         }
     }
+
+    private static var timer: Feedback<CounterState, Action> {
+        .scope(on: \.isConnectedToTimer) { states in
+            states
+                .map { $0 ? timerPublisher : Empty().eraseToAnyPublisher() }
+                .switchToLatest()
+                .eraseToAnyPublisher()
+        }
+    }
+
+    private static var timerPublisher: AnyPublisher<Action, Never> {
+        Timer.publish(every: 1.0, on: RunLoop.main, in: .default)
+            .autoconnect()
+            .map { _ in .increment }
+            .print("⏱")
+            .eraseToAnyPublisher()
+    }
+
 
 }
