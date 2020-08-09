@@ -2,7 +2,7 @@
 //  Store.swift
 //  CombineStore
 //
-//  Created by Yang on 2020/8/2.
+//  Created by Yang Lee on 2020/8/2.
 //  Copyright © 2020 Yang Lee. All rights reserved.
 //
 

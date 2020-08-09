@@ -2,7 +2,7 @@
 //  CounterView.swift
 //  CombineStoreExample
 //
-//  Created by Yang on 2020/8/2.
+//  Created by Yang Lee on 2020/8/2.
 //
 
 import SwiftUI

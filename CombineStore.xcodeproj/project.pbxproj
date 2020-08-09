@@ -400,6 +400,7 @@
 				LastSwiftMigration = 9999;
 				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 9999;
+				ORGANIZATIONNAME = "Yang Lee";
 				TargetAttributes = {
 					8DE5DFA724DC16E700A062E6 = {
 						CreatedOnToolsVersion = 12.0;
