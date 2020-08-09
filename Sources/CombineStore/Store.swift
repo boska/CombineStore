@@ -10,7 +10,7 @@
 import Combine
 import SwiftUI
 
-public final class Store<State: StateManageable>: ObservableObject {
+public final class Store<State: StoreManageable>: ObservableObject {
     @Published public private(set) var state: State
     private let _actions: PassthroughSubject<State.Action, Never> = .init()
     private let _feedbacks: PassthroughSubject<Feedback<State, State.Action>, Never> = .init()

@@ -22,7 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9924DC143800A062E6 /* Reducer.swift */; };
-		8DE5DF9E24DC143800A062E6 /* StateManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* StateManageable.swift */; };
+		8DE5DF9E24DC143800A062E6 /* StoreManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */; };
 		8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9B24DC143800A062E6 /* Feedback.swift */; };
 		8DE5DFA024DC143800A062E6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9C24DC143800A062E6 /* Store.swift */; };
 		8DE5DFAB24DC16E700A062E6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DFAA24DC16E700A062E6 /* ExampleApp.swift */; };
@@ -101,7 +101,7 @@
 
 /* Begin PBXFileReference section */
 		8DE5DF9924DC143800A062E6 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
-		8DE5DF9A24DC143800A062E6 /* StateManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManageable.swift; sourceTree = "<group>"; };
+		8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManageable.swift; sourceTree = "<group>"; };
 		8DE5DF9B24DC143800A062E6 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8DE5DF9C24DC143800A062E6 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		8DE5DFA824DC16E700A062E6 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,7 +279,7 @@
 				8DE5DF9B24DC143800A062E6 /* Feedback.swift */,
 				8DE5DF9924DC143800A062E6 /* Reducer.swift */,
 				8DE5DF9C24DC143800A062E6 /* Store.swift */,
-				8DE5DF9A24DC143800A062E6 /* StateManageable.swift */,
+				8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */,
 			);
 			name = CombineStore;
 			path = Sources/CombineStore;
@@ -503,7 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				8DE5DF9E24DC143800A062E6 /* StateManageable.swift in Sources */,
+				8DE5DF9E24DC143800A062E6 /* StoreManageable.swift in Sources */,
 				8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */,
 				8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */,
 				8DE5DFA024DC143800A062E6 /* Store.swift in Sources */,

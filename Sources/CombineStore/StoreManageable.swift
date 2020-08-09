@@ -1,12 +1,12 @@
 //
-//  StateManageable.swift
+//  StoreManageable.swift
 //  CombineStore
 //
 //  Created by Yang on 2020/8/2.
 //  Copyright © 2020 Yang Lee. All rights reserved.
 //
 
-public protocol StateManageable {
+public protocol StoreManageable {
     associatedtype Action
 
     static var initialState: Self { get }
@@ -14,7 +14,7 @@ public protocol StateManageable {
     static var feedback: Feedback<Self, Self.Action> { get } // (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
 }
 
-extension StateManageable {
+extension StoreManageable {
     static var feedback: Feedback<Self, Self.Action> {
         .empty
     }

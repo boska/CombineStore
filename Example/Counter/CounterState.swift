@@ -10,7 +10,7 @@ import Combine
 import CombineStore
 import SwiftUI
 
-struct CounterState: StateManageable {
+struct CounterState: StoreManageable {
     var value: Int
     var isLoadingNumber = false
     var isConnectedToTimer = false
