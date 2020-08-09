@@ -37,13 +37,14 @@ public struct Feedback<State, Action> {
         }
     }
 
-    func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
-        _closure(state)
-    }
-
-    static var empty: Self {
+    public static var empty: Self {
         Feedback() { _ in
             Empty().eraseToAnyPublisher()
         }
     }
+
+    func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
+        _closure(state)
+    }
+
 }

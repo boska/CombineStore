@@ -89,6 +89,4 @@ struct CounterState: StoreManageable {
             .print("⏱")
             .eraseToAnyPublisher()
     }
-
-
 }

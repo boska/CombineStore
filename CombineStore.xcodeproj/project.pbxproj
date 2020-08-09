@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -21,6 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		8D1E9FEA24E01B0A00F1C8A0 /* PaginationListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878924E00C3100A6926D /* PaginationListState.swift */; };
+		8D6600A524E030CE00445EB4 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = 8D6600A424E030CE00445EB4 /* CombineExt */; };
+		8D6600A724E0612300445EB4 /* Dispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6600A624E0612300445EB4 /* Dispatchable.swift */; };
+		8DBA878824E0069200A6926D /* PaginationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878724E0069200A6926D /* PaginationListView.swift */; };
+		8DBA878C24E00D0100A6926D /* PaginationListApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878B24E00D0100A6926D /* PaginationListApi.swift */; };
 		8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9924DC143800A062E6 /* Reducer.swift */; };
 		8DE5DF9E24DC143800A062E6 /* StoreManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */; };
 		8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9B24DC143800A062E6 /* Feedback.swift */; };
@@ -100,6 +105,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8D6600A624E0612300445EB4 /* Dispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatchable.swift; sourceTree = "<group>"; };
+		8DBA878724E0069200A6926D /* PaginationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationListView.swift; sourceTree = "<group>"; };
+		8DBA878924E00C3100A6926D /* PaginationListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationListState.swift; sourceTree = "<group>"; };
+		8DBA878B24E00D0100A6926D /* PaginationListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationListApi.swift; sourceTree = "<group>"; };
 		8DE5DF9924DC143800A062E6 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManageable.swift; sourceTree = "<group>"; };
 		8DE5DF9B24DC143800A062E6 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
@@ -130,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D6600A524E030CE00445EB4 /* CombineExt in Frameworks */,
 				8DE5DFD824DC180400A062E6 /* CombineStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,9 +176,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8DBA878224E0002800A6926D /* Pagination */ = {
+			isa = PBXGroup;
+			children = (
+				8DBA878724E0069200A6926D /* PaginationListView.swift */,
+				8DBA878924E00C3100A6926D /* PaginationListState.swift */,
+				8DBA878B24E00D0100A6926D /* PaginationListApi.swift */,
+				8D6600A624E0612300445EB4 /* Dispatchable.swift */,
+			);
+			path = Pagination;
+			sourceTree = "<group>";
+		};
 		8DE5DFA924DC16E700A062E6 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				8DBA878224E0002800A6926D /* Pagination */,
 				8DE5DFDD24DC261900A062E6 /* Counter */,
 				8DE5DFD324DC172F00A062E6 /* Example.entitlements */,
 				8DE5DFAA24DC16E700A062E6 /* ExampleApp.swift */,
@@ -303,6 +325,9 @@
 				8DE5DFDB24DC180500A062E6 /* PBXTargetDependency */,
 			);
 			name = Example;
+			packageProductDependencies = (
+				8D6600A424E030CE00445EB4 /* CombineExt */,
+			);
 			productName = Example;
 			productReference = 8DE5DFA824DC16E700A062E6 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -432,6 +457,9 @@
 				en,
 			);
 			mainGroup = OBJ_5;
+			packageReferences = (
+				8D6600A324E030CE00445EB4 /* XCRemoteSwiftPackageReference "CombineExt" */,
+			);
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -478,9 +506,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBA878C24E00D0100A6926D /* PaginationListApi.swift in Sources */,
+				8DBA878824E0069200A6926D /* PaginationListView.swift in Sources */,
 				8DE5DFDF24DC263300A062E6 /* CounterState.swift in Sources */,
+				8D6600A724E0612300445EB4 /* Dispatchable.swift in Sources */,
 				8DE5DFAD24DC16E700A062E6 /* CounterView.swift in Sources */,
 				8DE5DFAB24DC16E700A062E6 /* ExampleApp.swift in Sources */,
+				8D1E9FEA24E01B0A00F1C8A0 /* PaginationListState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,7 +652,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.Example;
@@ -685,7 +720,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.Example;
@@ -751,7 +789,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.ExampleTests;
@@ -813,7 +855,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.ExampleTests;
@@ -878,7 +924,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.ExampleUITests;
@@ -939,7 +989,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = boska.ExampleUITests;
@@ -965,7 +1019,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CombineStore.xcodeproj/CombineStore_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -996,7 +1053,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CombineStore.xcodeproj/CombineStore_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -1087,7 +1147,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CombineStore.xcodeproj/CombineStoreTests_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -1114,7 +1178,11 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = CombineStore.xcodeproj/CombineStoreTests_Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -1147,7 +1215,8 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				USE_HEADERMAP = NO;
 			};
 			name = Release;
@@ -1228,6 +1297,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8D6600A324E030CE00445EB4 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8D6600A424E030CE00445EB4 /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D6600A324E030CE00445EB4 /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = OBJ_1 /* Project object */;
 }
