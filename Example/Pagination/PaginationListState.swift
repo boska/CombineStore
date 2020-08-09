@@ -64,7 +64,7 @@ struct PaginationListState: StoreManageable {
     static var feedback: Feedback<PaginationListState, Action> {
         .merge([
             loadPage,
-            debouncedSearh
+            debouncedSearch
         ])
     }
 
@@ -86,7 +86,7 @@ struct PaginationListState: StoreManageable {
                 .eraseToAnyPublisher()
         }
     }
-    private static var debouncedSearh: Feedback<PaginationListState, Action> {
+    private static var debouncedSearch: Feedback<PaginationListState, Action> {
         .scope(on: \.searchTerm) { searchTerms in
             searchTerms
                 .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
