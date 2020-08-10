@@ -43,7 +43,7 @@ public struct Feedback<State, Action> {
         }
     }
 
-    func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
+    public func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
         _closure(state)
     }
 

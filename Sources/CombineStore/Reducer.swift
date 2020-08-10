@@ -16,7 +16,7 @@ public struct Reducer<State, Action> {
         self._closure = closure
     }
 
-    func callAsFunction(_ state: inout State, _ action: Action) {
+    public func callAsFunction(_ state: inout State, _ action: Action) {
         _closure(&state, action)
     }
 }

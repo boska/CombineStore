@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		8D1E9FEA24E01B0A00F1C8A0 /* PaginationListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878924E00C3100A6926D /* PaginationListState.swift */; };
+		8D5E5CDD24E1AF9C00170BEB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5E5CDC24E1AF9C00170BEB /* AppState.swift */; };
 		8D6600A524E030CE00445EB4 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = 8D6600A424E030CE00445EB4 /* CombineExt */; };
 		8D6600A724E0612300445EB4 /* Dispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6600A624E0612300445EB4 /* Dispatchable.swift */; };
 		8DBA878824E0069200A6926D /* PaginationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878724E0069200A6926D /* PaginationListView.swift */; };
@@ -105,6 +106,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8D5E5CDC24E1AF9C00170BEB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8D6600A624E0612300445EB4 /* Dispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatchable.swift; sourceTree = "<group>"; };
 		8DBA878724E0069200A6926D /* PaginationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationListView.swift; sourceTree = "<group>"; };
 		8DBA878924E00C3100A6926D /* PaginationListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationListState.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				8DE5DFDD24DC261900A062E6 /* Counter */,
 				8DE5DFD324DC172F00A062E6 /* Example.entitlements */,
 				8DE5DFAA24DC16E700A062E6 /* ExampleApp.swift */,
+				8D5E5CDC24E1AF9C00170BEB /* AppState.swift */,
 				8DE5DFAE24DC16E800A062E6 /* Assets.xcassets */,
 				8DE5DFB324DC16E800A062E6 /* Info.plist */,
 				8DE5DFB024DC16E800A062E6 /* Preview Content */,
@@ -509,6 +512,7 @@
 				8DBA878C24E00D0100A6926D /* PaginationListApi.swift in Sources */,
 				8DBA878824E0069200A6926D /* PaginationListView.swift in Sources */,
 				8DE5DFDF24DC263300A062E6 /* CounterState.swift in Sources */,
+				8D5E5CDD24E1AF9C00170BEB /* AppState.swift in Sources */,
 				8D6600A724E0612300445EB4 /* Dispatchable.swift in Sources */,
 				8DE5DFAD24DC16E700A062E6 /* CounterView.swift in Sources */,
 				8DE5DFAB24DC16E700A062E6 /* ExampleApp.swift in Sources */,

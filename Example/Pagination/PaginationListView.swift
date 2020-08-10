@@ -9,8 +9,17 @@
 import SwiftUI
 import CombineStore
 
-struct PaginationListView: View, Dispatchable {
-    @StateObject var store = Store<PaginationListState>()
+struct PaginationListView: View {
+    @StateObject var store = Store<AppState>()
+    @State var state = PaginationListState()
+
+//    var state: PaginationListState {
+//        store.state[keyPath: \.paginationList]
+//    }
+
+    func dispatch(_ action: PaginationListState.Action) {
+        store.dispatch(.paginationList(action))
+    }
 
     var body: some View {
         NavigationView {
@@ -25,10 +34,6 @@ struct PaginationListView: View, Dispatchable {
 
                 ForEach(state.results, id: \.id) { character in
                     HStack {
-                        //                        KFImage(character.imageUrl)
-                        //                            .resizable()
-                        //                            .cornerRadius(5)
-                        //                            .frame(width: 80, height: 80)
                         VStack(alignment: .leading) {
                             Text(character.name).fontWeight(.bold)
                             Text(character.species).fontWeight(.light)
@@ -40,17 +45,11 @@ struct PaginationListView: View, Dispatchable {
                     .onAppear { dispatch(.loadMore) }
             }
             .navigationBarTitle(Text("Pagination"))
+            .onReceive(store.$state.map(\.paginationList)) {
+                state = $0
+            }
         }
-        //        .alert(isPresented: .constant(state.errorMessage != nil)) {
-        //            Alert(title: Text("Oops, something went wrong"),
-        //                  message: Text(state.errorMessage ?? ""),
-        //                  dismissButton: .default(Text("Got it!")) {
-        //                    dispatch(.alertDismissed)
-        //                  })
-        //        }
-
     }
-
 }
 
 struct PaginationListView_Previews: PreviewProvider {
