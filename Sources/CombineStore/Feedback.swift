@@ -17,23 +17,35 @@ public struct Feedback<State, Action> {
     }
 
     public static func merge(_ feedbacks: [Self]) -> Self {
-        Feedback() { states in
+        Feedback() { state$ in
             Publishers.MergeMany(
-                feedbacks.map { $0(states) }
+                feedbacks.map { $0(state$) }
             )
             .eraseToAnyPublisher()
         }
     }
 
-    public static func scope<ScopedState: Equatable>(on stateKeyPath: WritableKeyPath<State, ScopedState>,
-                                                     _ scopedfeedback: @escaping (AnyPublisher<ScopedState, Never>) -> AnyPublisher<Action, Never>) -> Self {
-        Feedback() { states in
-            scopedfeedback(
-                states.map(stateKeyPath)
+    public static func scope<A: Equatable>(on keypathA: WritableKeyPath<State, A>,
+                                                     _ builder: @escaping (AnyPublisher<A, Never>) -> AnyPublisher<Action, Never>) -> Self {
+        Feedback() { state$ in
+            builder(
+                state$.map(keypathA)
                     .removeDuplicates()
                     .eraseToAnyPublisher()
             )
             .eraseToAnyPublisher()
+        }
+    }
+
+    public static func scope<A, B>(_ keypathA: WritableKeyPath<State, A>,
+                                   _ keypathB:WritableKeyPath<State, B>,
+                                   _ builder: @escaping (AnyPublisher<(A, B), Never>) -> AnyPublisher<Action, Never>) -> Self where A: Equatable, B:Equatable {
+        Feedback() { state$ in
+            let stateA$ = state$.map(keypathA).removeDuplicates()
+            let stateB$ = state$.map(keypathB).removeDuplicates()
+
+            let stateAB$ = Publishers.CombineLatest(stateA$, stateB$).eraseToAnyPublisher()
+            return builder(stateAB$)
         }
     }
 
@@ -43,8 +55,8 @@ public struct Feedback<State, Action> {
         }
     }
 
-    public func callAsFunction(_ state: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
-        _closure(state)
+    public func callAsFunction(_ state$: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
+        _closure(state$)
     }
 
 }
