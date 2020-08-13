@@ -5,15 +5,18 @@
 //  Created by Yang Lee on 2020/8/6.
 //
 
-
+import AVFoundation
 import Combine
+import CombineExt
 import CombineStore
 import SwiftUI
 
 struct CounterState: StoreManageable {
-    var value: Int
+    var value = 0
     var isLoadingNumber = false
     var isConnectedToTimer = false
+    var locale = Locale(identifier: "cs")
+    var numberInWords = "nula"
 
     enum Action {
         case increment
@@ -21,11 +24,11 @@ struct CounterState: StoreManageable {
         case loadNumber
         case numberDidLoad(Int)
         case toggleTimer
+        case toggleLocale
+        case numberInWordsDidChanged(String)
     }
 
-    static var initialState: CounterState {
-        .init(value: 0)
-    }
+    static let initialState = CounterState()
 
     static var reducer: Reducer<CounterState, Action> {
         .init { state, action in
@@ -46,6 +49,11 @@ struct CounterState: StoreManageable {
             case .toggleTimer:
                 state.isConnectedToTimer.toggle()
                 state.value = 0
+            case .toggleLocale:
+                state.locale = allLocales.randomElement() ?? .current
+
+            case .numberInWordsDidChanged(let newWords):
+                state.numberInWords = newWords
             }
         }
     }
@@ -54,16 +62,48 @@ struct CounterState: StoreManageable {
         .merge([
             loadNumber,
             timer,
+            speak,
         ])
     }
 
+    private static var allLocales: [Locale] {
+        AVSpeechSynthesisVoice.speechVoices()
+            .map(\.language)
+            .compactMap{ Locale(identifier: $0) }
+    }
+
+    private static var speak: Feedback<CounterState, Action> {
+        .scope(\.value, \.locale) { state$ in
+            let synthesizer = AVSpeechSynthesizer()
+            let formatter = NumberFormatter()
+
+            formatter.numberStyle = .spellOut
+
+            return state$
+                .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+                .map { (value, locale) in
+                    formatter.locale = locale
+
+                    let numberInWords = formatter.string(from: NSNumber(value: value))
+                    let utterance = AVSpeechUtterance(string: numberInWords ?? "")
+
+                    utterance.voice = AVSpeechSynthesisVoice(language: locale.identifier)
+                    print(locale.identifier)
+                    synthesizer.speak(utterance)
+
+                    return .numberInWordsDidChanged(numberInWords ?? "")
+                }
+                .eraseToAnyPublisher()
+        }
+    }
+
     private static var loadNumber: Feedback<CounterState, Action> {
-        .scope(on: \.isLoadingNumber) { states in
-            states
+        .scope(on: \.isLoadingNumber) {
+            $0
                 .filter { $0 }
                 .map { _ -> AnyPublisher<Action, Never> in
                     Just(.numberDidLoad(Int.random(in: 1...100)))
-                        .delay(for: 2.0, scheduler: DispatchQueue.main)
+                        .delay(for: 0.5, scheduler: DispatchQueue.main)
                         .print("🎲")
                         .eraseToAnyPublisher()
                 }
@@ -88,5 +128,53 @@ struct CounterState: StoreManageable {
             .map { _ in .increment }
             .print("⏱")
             .eraseToAnyPublisher()
+    }
+}
+
+
+#if canImport(Combine)
+import Combine
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension Publisher where Output == Never {
+    /// An output analog to [Publisher.setFailureType(to:)](https://developer.apple.com/documentation/combine/publisher/3204753-setfailuretype) for when `Output == Never`. This is especially helpful when chained after [.ignoreOutput()](https://developer.apple.com/documentation/combine/publisher/3204714-ignoreoutput) operator calls.
+    ///
+    /// - parameter outputType: The new output type for downstream.
+    ///
+    /// - returns: A publisher with a `NewOutput` output type.
+    func setOutputType<NewOutput>(to outputType: NewOutput.Type) -> Publishers.Map<Self, NewOutput> {
+        map { _ -> NewOutput in }
+    }
+}
+#endif
+
+extension Color {
+    static var strvRed: Self {
+        .init(hex: "c30928")
+    }
+
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (1, 1, 1, 0)
+        }
+
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue:  Double(b) / 255,
+            opacity: Double(a) / 255
+        )
     }
 }

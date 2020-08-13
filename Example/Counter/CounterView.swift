@@ -22,7 +22,12 @@ struct CounterView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
+            Text("\(state.numberInWords)")
+                .font(.title)
+                .foregroundColor(Color.white)
+
             Text("\(state.value)")
+                .foregroundColor(Color.white)
 
             HStack {
                 Button(action: { dispatch(.increment)}) {
@@ -38,14 +43,15 @@ struct CounterView: View {
                 Button(action: { dispatch(.loadNumber)  }) {
                     Image(systemName: "questionmark.square.fill")
                 }
-                .foregroundColor(state.isLoadingNumber ? Color.green : Color.blue)
+                .foregroundColor(state.isLoadingNumber ? Color.green : Color.strvRed)
 
-                Button(action: { dispatch(.toggleTimer) }) {
+                Button(action: { dispatch(.toggleLocale) }) {
                     Image(systemName: "arrow.right.arrow.left.square.fill")
                 }
-                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.blue)
+                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.strvRed)
             }
         }
+        .foregroundColor(Color.strvRed)
         .font(.system(size: 100))
         .frame(width: 300)
 
