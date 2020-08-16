@@ -33,7 +33,7 @@ struct PaginationListState: StoreManageable {
     static var reducer: Reducer<PaginationListState, Action> {
         .init { state, action in
             switch action {
-            case .responseReceived(let response):
+            case let .responseReceived(response):
                 state.pagination = response.info
 
                 if state.pagination?.prev == nil {
@@ -41,22 +41,21 @@ struct PaginationListState: StoreManageable {
                 } else {
                     state.results += response.results
                 }
-                
+
                 state.isLoading = false
 
-            case .errorOccurred(let error):
+            case let .errorOccurred(error):
                 state.errorMessage = error.localizedDescription
 
             case .alertDismissed:
                 state.errorMessage = nil
-                
-            case .searchTermDidChange(let newTerm):
+
+            case let .searchTermDidChange(newTerm):
                 state.searchTerm = newTerm
                 state.pagination = nil
 
             case .loadMore:
                 state.isLoading = true
-
             }
         }
     }
@@ -64,7 +63,7 @@ struct PaginationListState: StoreManageable {
     static var feedback: Feedback<PaginationListState, Action> {
         .merge([
             loadPage,
-            debouncedSearch
+            debouncedSearch,
         ])
     }
 
@@ -86,6 +85,7 @@ struct PaginationListState: StoreManageable {
                 .eraseToAnyPublisher()
         }
     }
+
     private static var debouncedSearch: Feedback<PaginationListState, Action> {
         .scope(on: \.searchTerm) { searchTerms in
             searchTerms
@@ -96,4 +96,3 @@ struct PaginationListState: StoreManageable {
         }
     }
 }
-

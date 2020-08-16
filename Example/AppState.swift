@@ -26,9 +26,9 @@ struct AppState: StoreManageable {
     static var reducer: Reducer<AppState, Action> {
         .init { state, action in
             switch action {
-            case .counter(let action):
+            case let .counter(action):
                 CounterState.reducer(&state.counter, action)
-            case .paginationList(let action):
+            case let .paginationList(action):
                 PaginationListState.reducer(&state.paginationList, action)
             }
         }
@@ -39,17 +39,16 @@ struct AppState: StoreManageable {
             let counterActions = CounterState.feedback(states.map(\.counter).eraseToAnyPublisher())
                 .map { AppState.Action.counter($0) }
                 .eraseToAnyPublisher()
-            
+
             let paginationListActions = PaginationListState.feedback(states.map(\.paginationList).eraseToAnyPublisher())
                 .map { AppState.Action.paginationList($0) }
                 .eraseToAnyPublisher()
 
             return Publishers.MergeMany([
                 counterActions,
-                paginationListActions
+                paginationListActions,
             ])
-            .eraseToAnyPublisher()
+                .eraseToAnyPublisher()
         }
     }
-
 }

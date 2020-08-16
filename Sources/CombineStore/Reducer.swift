@@ -13,7 +13,7 @@ public struct Reducer<State, Action> {
     private let _closure: Closure
 
     public init(_ closure: @escaping Closure) {
-        self._closure = closure
+        _closure = closure
     }
 
     public func callAsFunction(_ state: inout State, _ action: Action) {

@@ -5,9 +5,9 @@
 //  Created by Yang Lee on 2020/8/2.
 //
 
-import SwiftUI
 import Combine
 import CombineStore
+import SwiftUI
 
 struct CounterView: View {
     @StateObject var store = Store<CounterState>()
@@ -19,7 +19,7 @@ struct CounterView: View {
     func dispatch(_ action: CounterState.Action) {
         store.dispatch(action)
     }
-    
+
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
             Text("\(state.numberInWords)")
@@ -30,31 +30,54 @@ struct CounterView: View {
                 .foregroundColor(Color.white)
 
             HStack {
-                Button(action: { dispatch(.increment)}) {
-                    Image(systemName: "plus.square.fill")
+                Button(action: { dispatch(.increment) }) {
+                    Image(systemName: "plus")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.red, lineWidth: 3)
+                        )
                 }
 
                 Button(action: { dispatch(.decrement) }) {
-                    Image(systemName: "minus.square.fill")
+                    Image(systemName: "minus")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.red, lineWidth: 3)
+                        )
                 }
             }
 
             HStack {
-                Button(action: { dispatch(.loadNumber)  }) {
-                    Image(systemName: "questionmark.square.fill")
+                Button(action: { dispatch(.loadNumber) }) {
+                    Image(systemName: "questionmark")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.red, lineWidth: 3)
+                        )
                 }
-                .foregroundColor(state.isLoadingNumber ? Color.green : Color.strvRed)
+                .foregroundColor(state.isLoadingNumber ? Color.green : Color.red)
 
                 Button(action: { dispatch(.toggleLocale) }) {
-                    Image(systemName: "arrow.right.arrow.left.square.fill")
+                    Image(systemName: "network")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.red, lineWidth: 3)
+                        )
                 }
-                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.strvRed)
+                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.red)
             }
         }
-        .foregroundColor(Color.strvRed)
+        .foregroundColor(Color.red)
         .font(.system(size: 100))
         .frame(width: 300)
-
     }
 }
 

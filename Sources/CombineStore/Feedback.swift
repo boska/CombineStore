@@ -17,7 +17,7 @@ public struct Feedback<State, Action> {
     }
 
     public static func merge(_ feedbacks: [Self]) -> Self {
-        Feedback() { state$ in
+        Feedback { state$ in
             Publishers.MergeMany(
                 feedbacks.map { $0(state$) }
             )
@@ -26,8 +26,8 @@ public struct Feedback<State, Action> {
     }
 
     public static func scope<A: Equatable>(on keypathA: WritableKeyPath<State, A>,
-                                                     _ builder: @escaping (AnyPublisher<A, Never>) -> AnyPublisher<Action, Never>) -> Self {
-        Feedback() { state$ in
+                                           _ builder: @escaping (AnyPublisher<A, Never>) -> AnyPublisher<Action, Never>) -> Self {
+        Feedback { state$ in
             builder(
                 state$.map(keypathA)
                     .removeDuplicates()
@@ -38,9 +38,9 @@ public struct Feedback<State, Action> {
     }
 
     public static func scope<A, B>(_ keypathA: WritableKeyPath<State, A>,
-                                   _ keypathB:WritableKeyPath<State, B>,
-                                   _ builder: @escaping (AnyPublisher<(A, B), Never>) -> AnyPublisher<Action, Never>) -> Self where A: Equatable, B:Equatable {
-        Feedback() { state$ in
+                                   _ keypathB: WritableKeyPath<State, B>,
+                                   _ builder: @escaping (AnyPublisher<(A, B), Never>) -> AnyPublisher<Action, Never>) -> Self where A: Equatable, B: Equatable {
+        Feedback { state$ in
             let stateA$ = state$.map(keypathA).removeDuplicates()
             let stateB$ = state$.map(keypathB).removeDuplicates()
 
@@ -50,7 +50,7 @@ public struct Feedback<State, Action> {
     }
 
     public static var empty: Self {
-        Feedback() { _ in
+        Feedback { _ in
             Empty().eraseToAnyPublisher()
         }
     }
@@ -58,5 +58,4 @@ public struct Feedback<State, Action> {
     public func callAsFunction(_ state$: AnyPublisher<State, Never>) -> AnyPublisher<Action, Never> {
         _closure(state$)
     }
-
 }

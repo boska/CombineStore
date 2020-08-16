@@ -1,5 +1,5 @@
-import XCTest
 @testable import CombineStore
+import XCTest
 
 final class CombineStore: XCTestCase {
     func testExample() {

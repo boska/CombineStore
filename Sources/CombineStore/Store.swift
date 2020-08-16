@@ -6,7 +6,6 @@
 //  Copyright © 2020 Yang Lee. All rights reserved.
 //
 
-
 import Combine
 import SwiftUI
 
@@ -32,7 +31,7 @@ public final class Store<State: StoreManageable>: ObservableObject {
             .store(in: &_cancellables)
 
         _feedbacks
-            .map { [weak self] feedback -> AnyPublisher<State.Action, Never> in
+            .map { [weak self] _ -> AnyPublisher<State.Action, Never> in
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
                 return State.feedback(self.$state.eraseToAnyPublisher())
             }
@@ -41,7 +40,6 @@ public final class Store<State: StoreManageable>: ObservableObject {
             .store(in: &_cancellables)
 
         _feedbacks.send(State.feedback)
-
     }
 
     public func dispatch(_ action: State.Action) {

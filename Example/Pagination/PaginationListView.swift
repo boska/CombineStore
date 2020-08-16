@@ -6,8 +6,8 @@
 //  Copyright © 2020 Yang Lee. All rights reserved.
 //
 
-import SwiftUI
 import CombineStore
+import SwiftUI
 
 struct PaginationListView: View {
     @StateObject var store = Store<AppState>()
@@ -57,6 +57,3 @@ struct PaginationListView_Previews: PreviewProvider {
         PaginationListView()
     }
 }
-
-
-
