@@ -11,12 +11,30 @@ import CombineExt
 import CombineStore
 import SwiftUI
 
+enum SupportedLocale: CaseIterable {
+    case 🇺🇸
+    case 🇨🇿
+    case 🇹🇼
+
+    var locale: Locale {
+        switch self {
+        case .🇨🇿:
+            return Locale(identifier: "cs")
+        case .🇺🇸:
+            return Locale(identifier: "us")
+        case .🇹🇼:
+            return Locale(identifier: "zh-TW")
+        }
+    }
+}
+
 struct CounterState: StoreManageable {
-    var value = 420
+    var value = 0
     var isLoadingNumber = false
     var isConnectedToTimer = false
-    var locale = Locale(identifier: "cs")
+    var locale = Locale(identifier: "zh-TW")
     var numberInWords = "nula"
+    var isMuted = true
 
     enum Action {
         case increment
@@ -25,6 +43,7 @@ struct CounterState: StoreManageable {
         case numberDidLoad(Int)
         case toggleTimer
         case toggleLocale
+        case toggleMute
         case numberInWordsDidChanged(String)
     }
 
@@ -54,6 +73,9 @@ struct CounterState: StoreManageable {
 
             case let .numberInWordsDidChanged(newWords):
                 state.numberInWords = newWords
+
+            case .toggleMute:
+                state.isMuted.toggle()
             }
         }
     }
@@ -67,9 +89,7 @@ struct CounterState: StoreManageable {
     }
 
     private static var allLocales: [Locale] {
-        AVSpeechSynthesisVoice.speechVoices()
-            .map(\.language)
-            .compactMap { Locale(identifier: $0) }
+        SupportedLocale.allCases.map(\.locale)
     }
 
     private static var speak: Feedback<CounterState, Action> {
@@ -88,6 +108,7 @@ struct CounterState: StoreManageable {
                     let utterance = AVSpeechUtterance(string: numberInWords ?? "")
 
                     utterance.voice = AVSpeechSynthesisVoice(language: locale.identifier)
+
                     print(locale.identifier)
                     synthesizer.speak(utterance)
 

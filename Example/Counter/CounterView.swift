@@ -23,10 +23,11 @@ struct CounterView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
             Text("\(state.numberInWords)")
-                .font(.title)
+                .font(.largeTitle)
                 .foregroundColor(Color.white)
 
             Text("\(state.value)")
+                .font(.largeTitle)
                 .foregroundColor(Color.white)
 
             HStack {
@@ -49,6 +50,17 @@ struct CounterView: View {
                                 .stroke(Color.red, lineWidth: 3)
                         )
                 }
+
+                Button(action: { dispatch(.toggleTimer) }) {
+                    Image(systemName: "timer")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(lineWidth: 3)
+                        )
+                }
+                .foregroundColor(state.isConnectedToTimer ? Color.green : Color.red)
             }
 
             HStack {
@@ -58,18 +70,29 @@ struct CounterView: View {
                         .frame(width: 60, height: 60)
                         .overlay(
                             Circle()
-                                .stroke(Color.red, lineWidth: 3)
+                                .stroke(lineWidth: 3)
                         )
                 }
                 .foregroundColor(state.isLoadingNumber ? Color.green : Color.red)
 
                 Button(action: { dispatch(.toggleLocale) }) {
-                    Image(systemName: "network")
+                    Text("🇨🇿")
                         .font(Font.system(.largeTitle))
                         .frame(width: 60, height: 60)
                         .overlay(
                             Circle()
-                                .stroke(Color.red, lineWidth: 3)
+                                .stroke(lineWidth: 3)
+                        )
+                }
+                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.red)
+
+                Button(action: { dispatch(.toggleMute) }) {
+                    Image(systemName: state.isMuted ? "speaker.slash" : "speaker")
+                        .font(Font.system(.largeTitle))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Circle()
+                                .stroke(lineWidth: 3)
                         )
                 }
                 .foregroundColor(state.isConnectedToTimer ? Color.red : Color.red)
