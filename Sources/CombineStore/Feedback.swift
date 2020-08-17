@@ -7,13 +7,14 @@
 //
 
 import Combine
+import Foundation
 
 public struct Feedback<State, Action> {
     public typealias Closure = (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
     private let _closure: Closure
 
-    public init(_ _closure: @escaping Closure) {
-        self._closure = _closure
+    public init(_ closure: @escaping Closure) {
+        _closure = closure
     }
 
     public static func merge(_ feedbacks: [Self]) -> Self {
@@ -25,13 +26,11 @@ public struct Feedback<State, Action> {
         }
     }
 
-    public static func scope<A: Equatable>(on keypathA: WritableKeyPath<State, A>,
-                                           _ builder: @escaping (AnyPublisher<A, Never>) -> AnyPublisher<Action, Never>) -> Self {
+    public static func scope<A>(on keypathA: WritableKeyPath<State, A>,
+                                _ builder: @escaping (AnyPublisher<A, Never>) -> AnyPublisher<Action, Never>) -> Self {
         Feedback { state$ in
             builder(
-                state$.map(keypathA)
-                    .removeDuplicates()
-                    .eraseToAnyPublisher()
+                state$.map(keypathA).eraseToAnyPublisher()
             )
             .eraseToAnyPublisher()
         }
@@ -39,10 +38,10 @@ public struct Feedback<State, Action> {
 
     public static func scope<A, B>(_ keypathA: WritableKeyPath<State, A>,
                                    _ keypathB: WritableKeyPath<State, B>,
-                                   _ builder: @escaping (AnyPublisher<(A, B), Never>) -> AnyPublisher<Action, Never>) -> Self where A: Equatable, B: Equatable {
+                                   _ builder: @escaping (AnyPublisher<(A, B), Never>) -> AnyPublisher<Action, Never>) -> Self {
         Feedback { state$ in
-            let stateA$ = state$.map(keypathA).removeDuplicates()
-            let stateB$ = state$.map(keypathB).removeDuplicates()
+            let stateA$ = state$.map(keypathA)
+            let stateB$ = state$.map(keypathB)
 
             let stateAB$ = Publishers.CombineLatest(stateA$, stateB$).eraseToAnyPublisher()
             return builder(stateAB$)

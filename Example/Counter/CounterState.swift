@@ -129,7 +129,6 @@ struct CounterState: StoreManageable {
                         .eraseToAnyPublisher()
                 }
                 .switchToLatest()
-                .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         }
     }

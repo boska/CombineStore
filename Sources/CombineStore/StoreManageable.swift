@@ -6,7 +6,7 @@
 //  Copyright © 2020 Yang Lee. All rights reserved.
 //
 
-public protocol StoreManageable {
+public protocol StoreManageable: Equatable {
     associatedtype Action
 
     static var initialState: Self { get }

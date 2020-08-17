@@ -71,7 +71,6 @@ struct PaginationListState: StoreManageable {
         .init { states in
             states
                 .map(\.isLoading)
-                .removeDuplicates()
                 .filter { $0 }
                 .withLatestFrom(states)
                 .map {

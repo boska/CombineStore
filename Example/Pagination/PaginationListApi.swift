@@ -86,14 +86,14 @@ struct CharactersResponse: Decodable {
     let results: [Character]
 }
 
-struct Pagination: Decodable {
+struct Pagination: Decodable, Equatable {
     let count: Int
     let pages: Int
     let next: Int?
     let prev: Int?
 }
 
-struct Character: Decodable {
+struct Character: Decodable, Equatable {
     let id: String
     let name: String
     let image: String

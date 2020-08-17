@@ -33,7 +33,7 @@ public final class Store<State: StoreManageable>: ObservableObject {
         _feedbacks
             .map { [weak self] _ -> AnyPublisher<State.Action, Never> in
                 guard let self = self else { return Empty().eraseToAnyPublisher() }
-                return State.feedback(self.$state.eraseToAnyPublisher())
+                return State.feedback(self.$state.removeDuplicates().eraseToAnyPublisher())
             }
             .switchToLatest()
             .subscribe(_actions)
