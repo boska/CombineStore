@@ -25,37 +25,35 @@ struct CounterState: StoreManageable {
 
     static let initialState = CounterState()
 
-    static var reducer: Reducer<CounterState, Action> {
-        .init { state, action in
-            switch action {
-            case .increment:
-                state.value += 1
+    static func reducer(_ state: inout CounterState, _ action: Action) {
+        switch action {
+        case .increment:
+            state.value += 1
 
-            case .decrement:
-                state.value -= 1
+        case .decrement:
+            state.value -= 1
 
-            case let .numberDidLoad(newValue):
-                state.value = newValue
-                state.isLoadingNumber = false
+        case let .numberDidLoad(newValue):
+            state.value = newValue
+            state.isLoadingNumber = false
 
-            case .loadNumber:
-                state.isLoadingNumber = true
+        case .loadNumber:
+            state.isLoadingNumber = true
 
-            case .toggleTimer:
-                state.isConnectedToTimer.toggle()
-                state.value = 0
-            }
+        case .toggleTimer:
+            state.isConnectedToTimer.toggle()
+            state.value = 0
         }
     }
 
-    static var feedback: Feedback<CounterState, Action> {
+    static var feedback: Feedback<CounterState> {
         .merge([
             loadNumber,
             timer,
         ])
     }
 
-    private static var loadNumber: Feedback<CounterState, Action> {
+    private static var loadNumber: Feedback<CounterState> {
         .scope(on: \.isLoadingNumber) {
             $0
                 .filter { $0 }
@@ -70,7 +68,7 @@ struct CounterState: StoreManageable {
         }
     }
 
-    private static var timer: Feedback<CounterState, Action> {
+    private static var timer: Feedback<CounterState> {
         .scope(on: \.isConnectedToTimer) { states in
             states
                 .map { $0 ? timerPublisher : Empty().eraseToAnyPublisher() }

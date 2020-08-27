@@ -23,18 +23,16 @@ struct AppState: StoreManageable {
               paginationList: .initialState)
     }
 
-    static var reducer: Reducer<AppState, Action> {
-        .init { state, action in
-            switch action {
-            case let .counter(action):
-                CounterState.reducer(&state.counter, action)
-            case let .paginationList(action):
-                PaginationListState.reducer(&state.paginationList, action)
-            }
+    static func reducer(_ state: inout AppState, _ action: Action) {
+        switch action {
+        case let .counter(action):
+            CounterState.reducer(&state.counter, action)
+        case let .paginationList(action):
+            PaginationListState.reducer(&state.paginationList, action)
         }
     }
 
-    static var feedback: Feedback<AppState, Action> {
+    static var feedback: Feedback<AppState> {
         .init { states in
             let counterActions = CounterState.feedback(states.map(\.counter).eraseToAnyPublisher())
                 .map { AppState.Action.counter($0) }

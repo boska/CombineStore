@@ -10,12 +10,14 @@ public protocol StoreManageable: Equatable {
     associatedtype Action
 
     static var initialState: Self { get }
-    static var reducer: Reducer<Self, Self.Action> { get } // (inout State, Action) -> Void
-    static var feedback: Feedback<Self, Self.Action> { get } // (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
+
+    static func reducer(_ state: inout Self, _ action: Action)
+
+    static var feedback: Feedback<Self> { get } // (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
 }
 
 extension StoreManageable {
-    static var feedback: Feedback<Self, Self.Action> {
+    static var feedback: Feedback<Self> {
         .empty
     }
 }

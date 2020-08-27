@@ -9,7 +9,8 @@
 import Combine
 import Foundation
 
-public struct Feedback<State, Action> {
+public struct Feedback<State: StoreManageable> {
+    public typealias Action = State.Action
     public typealias Closure = (AnyPublisher<State, Never>) -> AnyPublisher<Action, Never>
     private let _closure: Closure
 

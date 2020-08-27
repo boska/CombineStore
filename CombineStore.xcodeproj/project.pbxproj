@@ -26,7 +26,6 @@
 		8D6600A524E030CE00445EB4 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = 8D6600A424E030CE00445EB4 /* CombineExt */; };
 		8DBA878824E0069200A6926D /* PaginationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878724E0069200A6926D /* PaginationListView.swift */; };
 		8DBA878C24E00D0100A6926D /* PaginationListApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA878B24E00D0100A6926D /* PaginationListApi.swift */; };
-		8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9924DC143800A062E6 /* Reducer.swift */; };
 		8DE5DF9E24DC143800A062E6 /* StoreManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */; };
 		8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9B24DC143800A062E6 /* Feedback.swift */; };
 		8DE5DFA024DC143800A062E6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5DF9C24DC143800A062E6 /* Store.swift */; };
@@ -109,7 +108,6 @@
 		8DBA878724E0069200A6926D /* PaginationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationListView.swift; sourceTree = "<group>"; };
 		8DBA878924E00C3100A6926D /* PaginationListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationListState.swift; sourceTree = "<group>"; };
 		8DBA878B24E00D0100A6926D /* PaginationListApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationListApi.swift; sourceTree = "<group>"; };
-		8DE5DF9924DC143800A062E6 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManageable.swift; sourceTree = "<group>"; };
 		8DE5DF9B24DC143800A062E6 /* Feedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		8DE5DF9C24DC143800A062E6 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				8DE5DF9B24DC143800A062E6 /* Feedback.swift */,
-				8DE5DF9924DC143800A062E6 /* Reducer.swift */,
 				8DE5DF9C24DC143800A062E6 /* Store.swift */,
 				8DE5DF9A24DC143800A062E6 /* StoreManageable.swift */,
 			);
@@ -372,7 +369,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_18 /* Build configuration list for PBXNativeTarget "CombineStore" */;
 			buildPhases = (
-				8D65458D24E988E200823963 /* ShellScript */,
 				OBJ_21 /* Sources */,
 				OBJ_23 /* Frameworks */,
 			);
@@ -502,26 +498,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		8D65458D24E988E200823963 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		8DE5DFA424DC16E700A062E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -558,7 +534,6 @@
 			buildActionMask = 0;
 			files = (
 				8DE5DF9E24DC143800A062E6 /* StoreManageable.swift in Sources */,
-				8DE5DF9D24DC143800A062E6 /* Reducer.swift in Sources */,
 				8DE5DF9F24DC143800A062E6 /* Feedback.swift in Sources */,
 				8DE5DFA024DC143800A062E6 /* Store.swift in Sources */,
 			);
