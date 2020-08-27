@@ -10,12 +10,8 @@ import CombineStore
 import SwiftUI
 
 struct PaginationListView: View {
-    @StateObject var store = Store<AppState>()
+    @EnvironmentObject var store: Store<AppState>
     @State var state = PaginationListState()
-
-//    var state: PaginationListState {
-//        store.state[keyPath: \.paginationList]
-//    }
 
     func dispatch(_ action: PaginationListState.Action) {
         store.dispatch(.paginationList(action))

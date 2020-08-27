@@ -10,14 +10,11 @@ import CombineStore
 import SwiftUI
 
 struct CounterView: View {
-    @StateObject var store = Store<CounterState>()
-
-    var state: CounterState {
-        store.state
-    }
+    @EnvironmentObject var store: Store<AppState>
+    @State var state = CounterState()
 
     func dispatch(_ action: CounterState.Action) {
-        store.dispatch(action)
+        store.dispatch(.counter(action))
     }
 
     var body: some View {
@@ -75,6 +72,9 @@ struct CounterView: View {
         .foregroundColor(Color.red)
         .font(.system(size: 100))
         .frame(width: 300)
+        .onReceive(store.$state.map(\.counter)) {
+            state = $0
+        }
     }
 }
 
