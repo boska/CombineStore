@@ -22,10 +22,6 @@ struct CounterView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 25) {
-            Text("\(state.numberInWords)")
-                .font(.largeTitle)
-                .foregroundColor(Color.white)
-
             Text("\(state.value)")
                 .font(.largeTitle)
                 .foregroundColor(Color.white)
@@ -50,17 +46,6 @@ struct CounterView: View {
                                 .stroke(Color.red, lineWidth: 3)
                         )
                 }
-
-                Button(action: { dispatch(.toggleTimer) }) {
-                    Image(systemName: "timer")
-                        .font(Font.system(.largeTitle))
-                        .frame(width: 60, height: 60)
-                        .overlay(
-                            Circle()
-                                .stroke(lineWidth: 3)
-                        )
-                }
-                .foregroundColor(state.isConnectedToTimer ? Color.green : Color.red)
             }
 
             HStack {
@@ -75,8 +60,8 @@ struct CounterView: View {
                 }
                 .foregroundColor(state.isLoadingNumber ? Color.green : Color.red)
 
-                Button(action: { dispatch(.toggleLocale) }) {
-                    Text("🇨🇿")
+                Button(action: { dispatch(.toggleTimer) }) {
+                    Image(systemName: "timer")
                         .font(Font.system(.largeTitle))
                         .frame(width: 60, height: 60)
                         .overlay(
@@ -84,18 +69,7 @@ struct CounterView: View {
                                 .stroke(lineWidth: 3)
                         )
                 }
-                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.red)
-
-                Button(action: { dispatch(.toggleMute) }) {
-                    Image(systemName: state.isMuted ? "speaker.slash" : "speaker")
-                        .font(Font.system(.largeTitle))
-                        .frame(width: 60, height: 60)
-                        .overlay(
-                            Circle()
-                                .stroke(lineWidth: 3)
-                        )
-                }
-                .foregroundColor(state.isConnectedToTimer ? Color.red : Color.red)
+                .foregroundColor(state.isConnectedToTimer ? Color.green : Color.red)
             }
         }
         .foregroundColor(Color.red)
