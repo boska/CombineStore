@@ -96,6 +96,6 @@ CombineStore is available under the MIT license. See the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ by [Your Name/Team Name]
+Made with ❤️ by [Yang Lee, STRV]
 
 Happy coding! 🚀👨‍💻👩‍💻
